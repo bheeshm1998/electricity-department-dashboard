@@ -1,6 +1,6 @@
 package com.bcg.ebdashboardbackend.model;
 
-public enum GovtIdType {
+public enum IdType {
 
     AADHAR,
     VOTER_ID,

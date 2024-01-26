@@ -1,5 +1,6 @@
 package com.bcg.ebdashboardbackend.batchProcess;
 
+import com.bcg.ebdashboardbackend.entity.Connection;
 import com.bcg.ebdashboardbackend.entity.Customer;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -9,6 +10,8 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.function.Function;
 
 @Configuration
 @EnableBatchProcessing
@@ -35,8 +38,8 @@ public class BatchConfiguration {
 
     @Bean
     public Step myStep() {
-        return stepBuilderFactory.get("myStep")
-                .<CustomerDataInput, Customer>chunk(10)
+        return stepBuilderFactory.get("step")
+                .<CustomerDataInput, Connection>chunk(100)
                 .reader(csvItemReader.reader())
                 .processor(csvItemProcessor)
                 .writer(jpaItemWriter)

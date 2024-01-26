@@ -1,21 +1,24 @@
 package com.bcg.ebdashboardbackend.entity;
 
 import com.bcg.ebdashboardbackend.model.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Integer id;
+    Long id;
 
     @Column
     String name;
@@ -23,39 +26,12 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     Gender gender;
 
-    String district;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="address_id")
+    Address address;
 
-    String state;
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name="customer_identification_id")
+    GovtIdentification govtIdentification;
 
-    String pinCode;
-
-    @Enumerated(EnumType.STRING)
-    OwnershipType ownershipType;
-
-    @Enumerated(EnumType.STRING)
-    GovtIdType govtIdType;
-
-    @Column(unique = true)
-    String idNumber;
-
-    @Enumerated(EnumType.STRING)
-    PlotType plotType;
-
-    @Positive(message = "Load must be a positive")
-    Float loadAppliedInKW;
-
-    LocalDate applicationDate;
-
-    LocalDate approvalDate;
-
-    LocalDate modifiedDate;
-
-    @Enumerated(EnumType.STRING)
-    ApplicationStatus applicationStatus;
-
-    @OneToOne
-    Reviewer reviewer;
-
-    @Column(columnDefinition = "TEXT")
-    String reviewerComments;
 }

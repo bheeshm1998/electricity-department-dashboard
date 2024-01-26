@@ -24,7 +24,7 @@ public class CustomerDetailDTO {
 
     OwnershipType ownershipType;
 
-    GovtIdType govtIdType;
+    IdType govtIdType;
 
     String idNumber;
 

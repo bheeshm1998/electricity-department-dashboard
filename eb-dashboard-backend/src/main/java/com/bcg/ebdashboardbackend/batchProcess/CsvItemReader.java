@@ -16,7 +16,6 @@ public class CsvItemReader {
 
     final String[] FIELD_NAMES = new String[] {"ID","Applicant_Name",	"Gender",	"District",	"State",	"Pincode",	"Ownership",	"GovtID_Type",	"ID_Number",	"Category",	"Load_Applied",	"Date_of_Application",	"Date_of_Approval",	"Modified_Date",	"Status",	"Reviewer_ID",	"Reviewer_Name",	"Reviewer_Comments"};
 
-
     public ItemReader<CustomerDataInput> reader() {
         log.info("Reading the csv file");
         FlatFileItemReader<CustomerDataInput> reader = new FlatFileItemReader<>();
