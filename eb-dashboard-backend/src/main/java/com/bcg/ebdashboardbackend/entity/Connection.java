@@ -29,6 +29,8 @@ public class Connection {
 
     LocalDate applicationDate;
 
+    String yearOfRequest;
+
     LocalDate approvalDate;
 
     LocalDate modifiedDate;
@@ -41,8 +43,6 @@ public class Connection {
 
     Long reviewerId;
 
-//    @ManyToOne(cascade = CascadeType.PERSIST)
-//    @JoinColumn(name = "reviewer_id")
     @Transient
     Reviewer reviewer;
 

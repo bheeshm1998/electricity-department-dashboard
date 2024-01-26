@@ -41,6 +41,7 @@ public class CsvItemProcessor implements ItemProcessor<CustomerDataInput, Connec
                 .plotType(PlotType.valueOf(customerDataInput.getCategory().toUpperCase()))
                 .applicationStatus(ApplicationStatus.valueOf(customerDataInput.getStatus().toUpperCase().replace(" ", "_")))
                 .reviewerComments(customerDataInput.getReviewer_Comments())
+                .yearOfRequest(String.valueOf(stringToLocalDateConverter.apply(customerDataInput.getDate_of_Application()).getYear()))
                 .reviewer(Reviewer.builder()
                         .id(Long.valueOf(customerDataInput.getReviewer_ID()))
                         .name(customerDataInput.getReviewer_Name())

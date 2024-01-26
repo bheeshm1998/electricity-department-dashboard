@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 public class CustomerDetailDTO {
 
-    Integer id;
+    Long id;
 
     String name;
 

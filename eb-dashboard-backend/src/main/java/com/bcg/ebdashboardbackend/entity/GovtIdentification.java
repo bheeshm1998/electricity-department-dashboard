@@ -1,9 +1,7 @@
 package com.bcg.ebdashboardbackend.entity;
 
 import com.bcg.ebdashboardbackend.model.IdType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +10,8 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class GovtIdentification {
 
     @Id

@@ -9,10 +9,10 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class EbConnectionRequestDTO {
+public class ConnectionRequestDTO {
 
 
-    Integer id;
+    Long id;
 
     String name;
 
