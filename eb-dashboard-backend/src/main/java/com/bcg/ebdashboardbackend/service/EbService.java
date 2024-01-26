@@ -11,5 +11,5 @@ public interface EbService {
 
     public CustomerDetailDTO getCustomerDetails(Integer id);
 
-    public List<EbConnectionRequestDTO> getListOfConnectionRequests();
+    public List<EbConnectionRequestDTO> getListOfConnectionRequests(Integer pageSize, Integer pageNumber);
 }

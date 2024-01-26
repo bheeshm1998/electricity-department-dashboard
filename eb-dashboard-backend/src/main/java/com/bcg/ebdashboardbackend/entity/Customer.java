@@ -33,7 +33,7 @@ public class Customer {
     OwnershipType ownershipType;
 
     @Enumerated(EnumType.STRING)
-    GovtIdType gotIdType;
+    GovtIdType govtIdType;
 
     @Column(unique = true)
     String idNumber;

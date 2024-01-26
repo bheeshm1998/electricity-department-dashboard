@@ -1,9 +1,13 @@
 package com.bcg.ebdashboardbackend.dto;
 
 import com.bcg.ebdashboardbackend.model.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
+@Getter
+@Setter
 public class CustomerDetailDTO {
 
     Integer id;
@@ -20,7 +24,7 @@ public class CustomerDetailDTO {
 
     OwnershipType ownershipType;
 
-    GovtIdType gotIdType;
+    GovtIdType govtIdType;
 
     String idNumber;
 
