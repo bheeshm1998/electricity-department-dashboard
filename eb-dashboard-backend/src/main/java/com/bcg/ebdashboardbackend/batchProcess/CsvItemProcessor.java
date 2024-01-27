@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.function.Function;
@@ -20,6 +21,7 @@ public class CsvItemProcessor implements ItemProcessor<CustomerDataInput, Connec
     public Connection process(CustomerDataInput customerDataInput) {
         final Connection connection = Connection.builder()
                 .id(Long.valueOf(customerDataInput.getID()))
+                .idAsString(customerDataInput.getID().toString())
                 .customer(Customer.builder()
                         .gender(Gender.valueOf(customerDataInput.getGender().toUpperCase()))
                         .name(customerDataInput.getApplicant_Name())
@@ -35,6 +37,7 @@ public class CsvItemProcessor implements ItemProcessor<CustomerDataInput, Connec
                                 .build())
                         .build())
                 .applicationDate(stringToLocalDateConverter.apply(customerDataInput.getDate_of_Application()))
+                .applicationDate2(Date.valueOf(stringToLocalDateConverter.apply(customerDataInput.getDate_of_Application())))
                 .approvalDate(stringToLocalDateConverter.apply(customerDataInput.getDate_of_Approval()))
                 .modifiedDate(stringToLocalDateConverter.apply(customerDataInput.getModified_Date()))
                 .loadAppliedInKW(Float.valueOf(customerDataInput.getLoad_Applied()))

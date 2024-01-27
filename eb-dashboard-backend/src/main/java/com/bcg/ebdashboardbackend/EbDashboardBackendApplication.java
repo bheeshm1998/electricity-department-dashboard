@@ -12,11 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
 
 public class EbDashboardBackendApplication {
 
-
 	public static void main(String[] args) {
 		SpringApplication.run(EbDashboardBackendApplication.class, args);
 
-		System.out.println("Application is up and running");
 	}
-
 }

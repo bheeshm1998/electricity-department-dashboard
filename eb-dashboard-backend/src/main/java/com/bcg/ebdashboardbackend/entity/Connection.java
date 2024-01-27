@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -20,6 +21,8 @@ public class Connection {
 //    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String idAsString;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     Customer customer;
@@ -28,6 +31,8 @@ public class Connection {
     Float loadAppliedInKW;
 
     LocalDate applicationDate;
+
+    Date applicationDate2;
 
     String yearOfRequest;
 

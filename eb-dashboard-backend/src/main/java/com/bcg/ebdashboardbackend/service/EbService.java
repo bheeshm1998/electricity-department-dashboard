@@ -1,11 +1,12 @@
 package com.bcg.ebdashboardbackend.service;
 
-import com.bcg.ebdashboardbackend.dto.BasicStatsDTO;
-import com.bcg.ebdashboardbackend.dto.CustomerDetailDTO;
-import com.bcg.ebdashboardbackend.dto.ConnectionRequestDTO;
-import com.bcg.ebdashboardbackend.dto.MonthlyChartDataDTO;
+import com.bcg.ebdashboardbackend.dto.*;
+import com.bcg.ebdashboardbackend.entity.Connection;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface EbService {
@@ -17,4 +18,8 @@ public interface EbService {
     BasicStatsDTO getBasicStats();
 
     MonthlyChartDataDTO getChartDataForAYear(String year);
+
+    CustomerDetailDTO updateTheDetails(RequestUpdateDTO request);
+
+    ConnectionsPage findByFilterAndDateRange(String filter, LocalDate startDate, LocalDate endDate, Pageable pageable);
 }

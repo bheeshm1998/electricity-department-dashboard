@@ -1,9 +1,6 @@
 package com.bcg.ebdashboardbackend.service.impl;
 
-import com.bcg.ebdashboardbackend.dto.BasicStatsDTO;
-import com.bcg.ebdashboardbackend.dto.ConnectionRequestDTO;
-import com.bcg.ebdashboardbackend.dto.CustomerDetailDTO;
-import com.bcg.ebdashboardbackend.dto.MonthlyChartDataDTO;
+import com.bcg.ebdashboardbackend.dto.*;
 import com.bcg.ebdashboardbackend.entity.Connection;
 import com.bcg.ebdashboardbackend.entity.Reviewer;
 import com.bcg.ebdashboardbackend.model.ApplicationStatus;
@@ -16,6 +13,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -37,6 +36,7 @@ public class EbServiceImpl implements EbService {
     @Override
     public List<ConnectionRequestDTO> getListOfConnectionRequests(Integer pageSize, Integer pageNumber) {
         Pageable page = PageRequest.of(pageNumber, pageSize);
+
         Page<Connection> connectionPage = connectionRepository.findAll(page);
         List<Connection> customerList = connectionPage.getContent();
         List<ConnectionRequestDTO> connectionRequestDTOList = customerList.stream().map(convertCustomerToConnectionDto).toList();
@@ -72,6 +72,40 @@ public class EbServiceImpl implements EbService {
             }
         }
         return chartData;
+    }
+
+    @Override
+    public CustomerDetailDTO updateTheDetails(RequestUpdateDTO request) {
+        Long id = request.getId();
+        Connection connection = connectionRepository.findById(id).orElse(null);
+
+        if(connection != null){
+            if(request.getLoadAppliedInKW() < 1 || request.getLoadAppliedInKW() > 200){
+                throw new RuntimeException("INVALID_LOAD_CAPACITY");
+            }
+            connection.setReviewerComments(request.getReviewerComments());
+            connection.setModifiedDate(LocalDate.now());
+            connection.setLoadAppliedInKW(request.getLoadAppliedInKW());
+            connection.setApplicationStatus(ApplicationStatus.valueOf(request.getApplicationStatus()));
+            if(ApplicationStatus.valueOf(request.getApplicationStatus()).equals(ApplicationStatus.APPROVED)){
+                connection.setApprovalDate(LocalDate.now());
+            }
+            connectionRepository.save(connection);
+        } else{
+            throw new RuntimeException("APPLICANT_DOES_NOT_EXIST");
+        }
+        return convertConnectionToCustomerDetailDTO.apply(connection);
+    }
+
+    @Override
+    public  ConnectionsPage findByFilterAndDateRange(String filter, LocalDate startDate, LocalDate endDate, Pageable pageable) {
+        Page<Connection> connections =  connectionRepository.findBySearchKeyAndDateRange(filter, Date.valueOf(startDate), Date.valueOf(endDate), pageable);
+
+        List<ConnectionRequestDTO> connectionRequestDTOList = connections.stream().map(convertCustomerToConnectionDto).toList();
+        ConnectionsPage page = new ConnectionsPage();
+        page.setTotalLength(connections.getTotalElements());
+        page.setConnections(connectionRequestDTOList);
+        return page;
     }
 
     Function<Connection, ConnectionRequestDTO> convertCustomerToConnectionDto = (conn) -> {
