@@ -21,7 +21,7 @@ The backend application requires Postgres database to store and retrive data. Th
    
 #### The build process for the Backend is
 1. Install Java ( version >= 17).
-1. Go to the directory `BCG_Assignment_Submission_Abhishek\EBDashboard\eb-dashboard-backend`. This is the base directory for the backend code.
+1. Go to the directory `eb-dashboard-backend/`. This is the base directory for the backend code.
 2. Open the terminal at this location
 3. Run the `mvnw clean install` command. It will install the dependencies that the backend needs to run. `mvnw` is a Maven wrapper included with the project files itself. Maven is the build tool required to run Maven projects (Springboot is one of them).
 4. Run the application in your local using the command `mvn spring-boot:run`. This will run the backend at port `7777`.
@@ -29,7 +29,7 @@ The backend application requires Postgres database to store and retrive data. Th
 
 #### The build process for the UI is
 1. Install NodeJs (version 16) and Angular (version 14).
-1. Go to the directory `BCG_Assignment_Submission_Abhishek\EBDashboard\eb-dashboard-frontend`. This is the base directory for the frontend code.
+1. Go to the directory `eb-dashboard-frontend/`. This is the base directory for the frontend code.
 2. Open the terminal at this location
 3. Run the `npm install` command. It will install the dependencies that the UI needs to run.
 4.  Run the application in your local using the command `ng serve --open`. This will run the UI and a browser window will open with the rendered UI. This will take the defautl port `4200` if available or chose any other port automatically.
