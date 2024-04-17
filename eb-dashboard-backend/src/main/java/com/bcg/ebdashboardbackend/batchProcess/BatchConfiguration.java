@@ -49,7 +49,7 @@ public class BatchConfiguration {
     @Bean
     public Job myJob(Step myStep) {
         return jobBuilderFactory.get("myJob")
-                .incrementer(new RunIdIncrementer())
+//                .incrementer(new RunIdIncrementer())
                 .start(myStep)
                 .build();
     }

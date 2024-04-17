@@ -23,7 +23,7 @@ public interface ConnectionRepository extends JpaRepository<Connection, Long> {
 
 
     @Query("SELECT e FROM Connection e WHERE (:filterParam IS NULL OR e.idAsString LIKE LOWER(CONCAT('%', :filterParam, '%'))) " +
-            "AND (e.applicationDate2 BETWEEN :startDate AND :endDate)")
+            "AND (e.applicationDate2 BETWEEN :startDate AND :endDate) ORDER BY e.id")
     Page<Connection> findBySearchKeyAndDateRange(@Param("filterParam") String filter, @Param("startDate") Date startDate,
                                                  @Param("endDate") Date endDate, Pageable pageable);
 
